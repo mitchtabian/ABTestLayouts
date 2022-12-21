@@ -1,0 +1,8 @@
+<resources>
+    <string name="app_name">Playground</string>
+    <string name="toggle_background_color">Toggle background color</string>
+    <string name="disable_legacy_ui">Disable Legacy UI</string>
+    <string name="enable_legacy_ui">Enable Legacy UI</string>
+    <string name="compose_text">COMPOSE!</string>
+    <string name="legacy_text">XML!</string>
+</resources>
