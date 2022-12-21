@@ -1,7 +1,7 @@
 # Description
 A simple app that serves either a **(1) Compose UI** or **(2) XML UI** based on an A/B test parameter retrieved from Firebase.
 
-<img src="art/demo.mp4">
+Here is a demo video: https://vimeo.com/783442478/736009f097.
 
 # Why did I build this?
 I wanted to play around with Firebase Remote Config and A/B testing. Also I wanted to figure out how to serve different UIs (XML or Compose) and have it be configurable at runtime.
