@@ -1,9 +1,8 @@
-package com.codingwithmitch.playground.legacy
+package com.codingwithmitch.playground.layout_runners
 
 import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
-import android.widget.Button
 import android.widget.Switch
 import android.widget.TextView
 import androidx.annotation.LayoutRes
@@ -12,22 +11,19 @@ import androidx.core.content.ContextCompat
 import com.codingwithmitch.playground.MainState
 import com.codingwithmitch.playground.MainState.MainBackgroundColor.*
 import com.codingwithmitch.playground.R
+import com.codingwithmitch.playground.domain.LegacyLayoutRunner
+import javax.inject.Inject
 
-class LegacyLayoutRunner(
-    @LayoutRes val layoutId: Int,
-) {
-    fun create(context: Context): View {
+class MainLegacyLayoutRunner @Inject constructor(): LegacyLayoutRunner<MainState> {
+
+    override fun create(context: Context, @LayoutRes layoutId: Int): View {
         return LayoutInflater.from(context).inflate(layoutId, null, false)
     }
 
-    fun update(
-        view: View,
-        state: MainState
-    ) {
+    override fun update(view: View, state: MainState) {
         val switch: Switch = view.findViewById(R.id.background_switch)
         val textView: TextView = view.findViewById(R.id.text_view)
         val constraintMain: ConstraintLayout = view.findViewById(R.id.constraint_main)
-        val disableLegacyButton: Button = view.findViewById(R.id.disable_legacy)
         switch.isChecked = state.mainBackgroundColor == WHITE
         val textColor = if (state.mainBackgroundColor == WHITE) {
             R.color.black
@@ -49,9 +45,6 @@ class LegacyLayoutRunner(
         textView.text = state.descriptionText
         switch.setOnClickListener {
             state.toggleBackgroundColor()
-        }
-        disableLegacyButton.setOnClickListener {
-            state.disableLegacyUI()
         }
     }
 }

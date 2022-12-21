@@ -1,7 +1,6 @@
-package com.codingwithmitch.playground
+package com.codingwithmitch.playground.layout_runners
 
 import androidx.compose.foundation.layout.*
-import androidx.compose.material.Button
 import androidx.compose.material.Surface
 import androidx.compose.material.Switch
 import androidx.compose.material.Text
@@ -13,32 +12,16 @@ import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import androidx.compose.ui.viewinterop.AndroidView
+import com.codingwithmitch.playground.MainState
 import com.codingwithmitch.playground.MainState.MainBackgroundColor.*
-import com.codingwithmitch.playground.legacy.LegacyLayoutRunner
+import com.codingwithmitch.playground.domain.ComposeLayoutRunner
+import javax.inject.Inject
 import com.codingwithmitch.playground.R as mainR
 
-class MainLayoutRunner(
-    private val legacyLayoutRunner: LegacyLayoutRunner
-){
-    @Composable
-    fun createLegacyLayout(state: MainState) {
-        AndroidView(
-            modifier = Modifier.fillMaxSize(),
-            factory = { context ->
-                legacyLayoutRunner.create(context)
-            },
-            update = { view ->
-                legacyLayoutRunner.update(
-                    view = view,
-                    state = state
-                )
-            }
-        )
-    }
+class MainComposeLayoutRunner @Inject constructor(): ComposeLayoutRunner<MainState> {
 
     @Composable
-    fun createComposeLayout(state: MainState) {
+    override fun Create(state: MainState) {
         val backgroundColor = if (state.mainBackgroundColor == WHITE) {
             Color.White
         } else {
@@ -80,18 +63,6 @@ class MainLayoutRunner(
                         onCheckedChange = {
                             state.toggleBackgroundColor()
                         },
-                    )
-                }
-                Button(
-                    modifier = Modifier.padding(top = 16.dp),
-                    onClick = {
-                        state.enableLegacyUI()
-                    },
-                ) {
-                    Text(
-                        text = stringResource(id = mainR.string.enable_legacy_ui),
-                        color = Color.White,
-                        fontSize = 14.sp,
                     )
                 }
                 Text(

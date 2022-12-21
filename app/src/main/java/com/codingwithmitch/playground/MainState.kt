@@ -5,8 +5,7 @@ data class MainState(
     val mainBackgroundColor: MainBackgroundColor,
     val descriptionText: String,
     val toggleBackgroundColor: () -> Unit,
-    val disableLegacyUI: () -> Unit,
-    val enableLegacyUI: () -> Unit,
+    val removeConfigSyncToken: String? = null
 ) {
 
     enum class MainBackgroundColor(val value: String) {
